@@ -1,8 +1,9 @@
 const audioContext = new AudioContext();
 const playButton = document.getElementById('play-button');
 
-
+// when button is clicked
 playButton.addEventListener('click', () => {
+    // fetch audio
     fetch('./audio3.mp3')
     .then(response => response.arrayBuffer())
     .then(audioData => {
@@ -11,7 +12,7 @@ playButton.addEventListener('click', () => {
             const analyser = audioContext.createAnalyser();
 
             
-            // this
+            
             bufferSource.connect(analyser);
             analyser.connect(audioContext.destination);
             
@@ -38,10 +39,12 @@ playButton.addEventListener('click', () => {
 
                 
                 context.beginPath();
-
+                
+                
                 const margin = window.innerWidth / bufferLength;
                 let x = 100;
                 for (let i = 0; i < bufferLength;++i){
+                    // normalize the frequency data to fit our canvas
                     let y = canvas.height - (frequencyData[i] / 255 * (canvas.height / 2));
                     
                     if (i == 0){
